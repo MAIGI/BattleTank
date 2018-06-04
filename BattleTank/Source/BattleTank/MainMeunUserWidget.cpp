@@ -2,6 +2,7 @@
 
 #include "MainMeunUserWidget.h"
 #include "UObject/ConstructorHelpers.h"
+#include "Components/Button.h"
 
 void UMainMeunUserWidget::Setup()
 {
@@ -13,4 +14,15 @@ void UMainMeunUserWidget::Setup()
 
 	FInputModeUIOnly InputModeData;
 	InputModeData.SetWidgetToFocus(this->TakeWidget());
+	InputModeData.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
+
+	PlayerController->SetInputMode(InputModeData);
+
+	PlayerController->bShowMouseCursor = true;
+
 }
+
+//void UMainMeunUserWidget::StartGame()
+//{
+//
+//}

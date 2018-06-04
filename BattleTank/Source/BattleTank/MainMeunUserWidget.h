@@ -16,9 +16,11 @@ class BATTLETANK_API UMainMeunUserWidget : public UUserWidget
 
 public:
 	void Setup();
+	void StartGame();
 
-private:
-
+//private:
+//	UPROPERTY(meta = (BindWidget))
+//		class UButton*ButtonStart=nullptr;
 	
 	
 };

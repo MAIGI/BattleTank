@@ -17,7 +17,6 @@ class BATTLETANK_API UBattleTankGameInstance : public UGameInstance
 	
 public:
 	UBattleTankGameInstance();
-	
 
 	
 };

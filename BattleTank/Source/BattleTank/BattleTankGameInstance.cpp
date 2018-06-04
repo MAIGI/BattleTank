@@ -10,7 +10,7 @@ UBattleTankGameInstance::UBattleTankGameInstance()
 	ConstructorHelpers::FClassFinder<UUserWidget>MenuClassFinder(TEXT("'/Game/Tank/UI/MainMenu.MainMenu'"));
 	TSubclassOf<class UUserWidget>MenuClass = MenuClassFinder.Class;
 
-	UMainMeunUserWidget * Menu = CreateWidget<UMainMeunUserWidget>(this,MenuClass);
-}
+	UMainMeunUserWidget * Menu = CreateWidget<UMainMeunUserWidget>(this, MenuClass);
 
+}
 
