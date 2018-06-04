@@ -16,7 +16,12 @@ class BATTLETANK_API UBattleTankGameInstance : public UGameInstance
 	GENERATED_BODY()
 	
 public:
-	UBattleTankGameInstance();
+	UBattleTankGameInstance(const FObjectInitializer&objectInitializer);
 
+	UFUNCTION(BlueprintCallable)
+	void LoadMainMenu();
+
+private:
+	UMainMeunUserWidget * Menu = nullptr;
 	
 };
