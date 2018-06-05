@@ -6,7 +6,7 @@
 
 void UMainMeunUserWidget::Setup()
 {
-	this->AddToViewport();
+	/*this->AddToViewport();
 
 	UWorld*World = GetWorld();
 
@@ -18,7 +18,7 @@ void UMainMeunUserWidget::Setup()
 
 	PlayerController->SetInputMode(InputModeData);
 
-	PlayerController->bShowMouseCursor = true;
+	PlayerController->bShowMouseCursor = true;*/
 
 }
 
