@@ -20,5 +20,12 @@ public:
 
 protected:
 	void BeginPlay()override;
-		
+
+	void Tick(float DeltaTime) override;
+	
+	//start the tank moving the barrel so that a shot would it where
+	//the crosshari intersects the world 
+
+	void AimTowardsCrossHair();
+
 };
