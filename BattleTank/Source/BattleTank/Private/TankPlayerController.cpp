@@ -29,6 +29,7 @@ void ATankPlayerController::Tick(float DeltaTime)
 	AimTowardsCrossHair();
 }
 
+//Get Controlled Tank
 ATank* ATankPlayerController::GetControlledTank() const
 {
 	return Cast<ATank>(GetPawn());
@@ -43,26 +44,40 @@ void ATankPlayerController::AimTowardsCrossHair()
 		/*UE_LOG(LogTemp, Warning, TEXT("OutHitLocation is : %s"),*OutHitLocation.ToString())*/
 	}
 
-		//if (OutHitResult.GetActor())
-		//{
-		//	UE_LOG(LogTemp, Warning, TEXT("Hitted Actor is : %s"), *OutHitResult.GetActor()->GetName())
-		//	/*UE_LOG(LogTemp, Warning, TEXT("Hitted Actor is : %s"), OutHitResult.Distance)*/
-		//}
-		//else
-		//{
-		//	UE_LOG(LogTemp, Warning, TEXT("No Hitted Actor"))
-		//}
 }
 
+//Get Tank's Direction
 bool ATankPlayerController::GetSightRayHitLocation(FVector &OutHitLocation) const
 {
+	//Set ViewPortSize
 	int32 ViewPortSizeX, ViewPortSizeY;
 	GetViewportSize(ViewPortSizeX, ViewPortSizeY);
-	auto ScreeLocation = FVector2D(ViewPortSizeX*CrosshairLocationX,ViewPortSizeY*CrosshairLocationY);
-	UE_LOG(LogTemp,Warning,TEXT("Screen Location is : %s"), *ScreeLocation.ToString())
-	OutHitLocation=FVector(1.0f,1.0f,1.0f);
+	auto ScreenLocation = FVector2D(ViewPortSizeX*CrosshairLocationX,ViewPortSizeY*CrosshairLocationY);
+
+	//Get CameraLookDirection
+	FVector LookDirection;
+	UE_LOG(LogTemp,Warning,TEXT("Screen Location is : %s"), *ScreenLocation.ToString())
+	if(GetLookDirection(ScreenLocation, LookDirection))
+	{
+		UE_LOG(LogTemp,Warning,TEXT("CameraWorldPosition is : %s"),*LookDirection.ToString())
+	}
 	return true;
 }
+
+//Get Camera Location and Direction
+bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector & LookDirection) const
+{
+	FVector CameraWorldLocation;
+	return (DeprojectScreenPositionToWorld
+	(
+		ScreenLocation.X,
+		ScreenLocation.Y,
+		CameraWorldLocation,
+		LookDirection
+	));
+}
+
+
 
 	//get world location of linetrace through crosshair
 	//if it hit the landscape

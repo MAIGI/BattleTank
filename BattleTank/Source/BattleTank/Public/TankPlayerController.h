@@ -47,4 +47,6 @@ private:
 	UPROPERTY(EditAnywhere)
 	float LineLength=1000;
 	const FVector EndLocation = StartLocation + GetControlRotation().Vector() * LineLength;
+
+	bool GetLookDirection(FVector2D ScreenLocation,FVector& LookDirection)const;
 };
