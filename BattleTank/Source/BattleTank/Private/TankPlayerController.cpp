@@ -37,53 +37,35 @@ ATank* ATankPlayerController::GetControlledTank() const
 void ATankPlayerController::AimTowardsCrossHair()
 {
 	if (!GetControlledTank()) { return; }
-
-	const UWorld* World = GetWorld();
-	if (!World)
+	FVector OutHitLocation;
+	if (GetSightRayHitLocation(OutHitLocation))
 	{
-		UE_LOG(LogTemp,Warning,TEXT("World is Empty!!!"))
+		/*UE_LOG(LogTemp, Warning, TEXT("OutHitLocation is : %s"),*OutHitLocation.ToString())*/
 	}
 
-	//Location the PC is focused on 
-	const FVector StartLocation = GetFocalLocation();
+		//if (OutHitResult.GetActor())
+		//{
+		//	UE_LOG(LogTemp, Warning, TEXT("Hitted Actor is : %s"), *OutHitResult.GetActor()->GetName())
+		//	/*UE_LOG(LogTemp, Warning, TEXT("Hitted Actor is : %s"), OutHitResult.Distance)*/
+		//}
+		//else
+		//{
+		//	UE_LOG(LogTemp, Warning, TEXT("No Hitted Actor"))
+		//}
+}
 
-	//Multi 256 in facing direction of PC
-	const FVector EndLocation = StartLocation + GetControlRotation().Vector() * 1000;
-
-	FCollisionQueryParams TraceParams(FName(TEXT("VictoreCore Trace")),true,GetControlledTank());
-	TraceParams.bTraceComplex = true;
-	FHitResult HittedActor = FHitResult(ForceInit);
-
-	World->LineTraceSingleByChannel
-	(
-		HittedActor,
-		StartLocation,
-		EndLocation,
-		ECollisionChannel::ECC_WorldStatic,
-		TraceParams
-	);
-
-	DrawDebugLine
-	(
-		GetWorld(),
-		StartLocation,
-		EndLocation,
-		FColor::Red,
-		0.0f,
-		-1,
-		12.333
-	);
-
-	if (HittedActor.GetActor())
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Hitted Actor is : %s"),*HittedActor.GetActor()->GetName())
-		UE_LOG(LogTemp, Warning, TEXT("Hitted Actor is : %s"), HittedActor.Distance)
-	}
-
+bool ATankPlayerController::GetSightRayHitLocation(FVector &OutHitLocation) const
+{
+	int32 ViewPortSizeX, ViewPortSizeY;
+	GetViewportSize(ViewPortSizeX, ViewPortSizeY);
+	auto ScreeLocation = FVector2D(ViewPortSizeX*CrosshairLocationX,ViewPortSizeY*CrosshairLocationY);
+	UE_LOG(LogTemp,Warning,TEXT("Screen Location is : %s"), *ScreeLocation.ToString())
+	OutHitLocation=FVector(1.0f,1.0f,1.0f);
+	return true;
+}
 
 	//get world location of linetrace through crosshair
 	//if it hit the landscape
 	//tell controlled tank to aim at this point
-}
 
 

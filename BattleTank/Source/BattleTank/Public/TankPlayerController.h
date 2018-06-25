@@ -15,7 +15,9 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 	
-public:
+private:
+
+
 	ATank* GetControlledTank() const;
 
 	void BeginPlay()override;
@@ -27,4 +29,22 @@ public:
 
 	void AimTowardsCrossHair();
 
+	bool GetSightRayHitLocation(FVector &OutHitLocation)const;
+
+	UPROPERTY(EditAnywhere)
+		float CrosshairLocationX=0.5f;
+	UPROPERTY(EditAnywhere)
+		float CrosshairLocationY=0.333f;
+
+private:
+	//OutHitResult
+	FHitResult OutHitResult;
+
+	//Location the PC is focused on 
+	const FVector StartLocation = GetFocalLocation();
+
+	//Multi 256 in facing direction of PC
+	UPROPERTY(EditAnywhere)
+	float LineLength=1000;
+	const FVector EndLocation = StartLocation + GetControlRotation().Vector() * LineLength;
 };
