@@ -5,6 +5,7 @@
 #include "Tank.h"
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
+#include "Camera/PlayerCameraManager.h"
 #include "TankPlayerController.generated.h"
 
 /**
@@ -36,17 +37,15 @@ private:
 	UPROPERTY(EditAnywhere)
 		float CrosshairLocationY=0.333f;
 
-private:
-	//OutHitResult
-	FHitResult OutHitResult;
-
 	//Location the PC is focused on 
 	const FVector StartLocation = GetFocalLocation();
 
 	//Multi 256 in facing direction of PC
 	UPROPERTY(EditAnywhere)
-	float LineLength=1000;
-	const FVector EndLocation = StartLocation + GetControlRotation().Vector() * LineLength;
+	float LineTraceRange=1000000;
+	const FVector EndLocation = StartLocation + GetControlRotation().Vector() * LineTraceRange;
 
 	bool GetLookDirection(FVector2D ScreenLocation,FVector& LookDirection)const;
+
+	bool GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation)const ;
 };
