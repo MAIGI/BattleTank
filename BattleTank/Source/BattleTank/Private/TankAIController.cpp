@@ -31,7 +31,7 @@ ATank * ATankAIController::GetPlayerTank() const
 	else { return nullptr; }
 }
 
-void ATankAIController::Tick(float DeltaTime)
+void ATankAIController::Tick(float DeltaTime) 
 {
 	Super::Tick(DeltaTime);
 	if (GetPlayerTank())
