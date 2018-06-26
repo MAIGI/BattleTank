@@ -36,14 +36,8 @@ private:
 		float CrosshairLocationX=0.5f;
 	UPROPERTY(EditAnywhere)
 		float CrosshairLocationY=0.333f;
-
-	//Location the PC is focused on 
-	const FVector StartLocation = GetFocalLocation();
-
-	//Multi 256 in facing direction of PC
 	UPROPERTY(EditAnywhere)
-	float LineTraceRange=1000000;
-	const FVector EndLocation = StartLocation + GetControlRotation().Vector() * LineTraceRange;
+		float LineTraceRange = 100000.0f;
 
 	bool GetLookDirection(FVector2D ScreenLocation,FVector& LookDirection)const;
 

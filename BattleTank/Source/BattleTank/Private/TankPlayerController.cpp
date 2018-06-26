@@ -56,11 +56,12 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector &OutHitLocation) cons
 	//Get CameraLookDirection
 	FVector LookDirection;
 	//UE_LOG(LogTemp,Warning,TEXT("Screen Location is : %s"), *ScreenLocation.ToString())
-	if(GetLookDirection(ScreenLocation, LookDirection))
+	if (GetLookDirection(ScreenLocation, LookDirection))
 	{
 		GetLookVectorHitLocation(LookDirection, OutHitLocation);
+		return true;
 	}
-	return true;
+	return false;
 }
 
 //Get Camera Location and Direction
@@ -80,6 +81,8 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection,FVect
 {
 	//OutHitResult
 	FHitResult OutHitResult;
+	auto StartLocation = PlayerCameraManager->GetCameraLocation();
+	auto EndLocation = StartLocation + (LookDirection*LineTraceRange);
 	if (GetWorld()->LineTraceSingleByChannel(
 		OutHitResult,
 		StartLocation,
