@@ -20,6 +20,8 @@ public:
 
 	ATank* GetPlayerTank()const;
 
+	void Tick(float DeltaTime) override;
+
 protected:
 	void BeginPlay()override;
 	

@@ -30,3 +30,13 @@ ATank * ATankAIController::GetPlayerTank() const
 	if (AIGettedPlayerTank) { return Cast<ATank>(AIGettedPlayerTank); }
 	else { return nullptr; }
 }
+
+void ATankAIController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	if (GetPlayerTank())
+	{
+		auto PlayerTankLocation = GetPlayerTank()->GetActorLocation();
+		GetAIControlledTank()->AimAt(PlayerTankLocation);
+	}
+}
