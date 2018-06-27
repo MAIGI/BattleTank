@@ -22,7 +22,7 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UTankAimingComponent* TankAimingCompoent=nullptr;
+	UTankAimingComponent* TankAimingComponent=nullptr;
 
 public:	
 	// Called every frame

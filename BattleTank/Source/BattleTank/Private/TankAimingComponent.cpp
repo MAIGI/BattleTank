@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankAimingComponent.h"
+#include "GameFramework/Actor.h"
 
 
 // Sets default values for this component's properties
@@ -13,6 +14,12 @@ UTankAimingComponent::UTankAimingComponent()
 	// ...
 }
 
+
+void UTankAimingComponent::AimAt(FVector HitLocation)
+{
+	auto OurTankName = GetOwner()->GetName();
+	UE_LOG(LogTemp, Warning, TEXT("%s is : %s"), *OurTankName, *HitLocation.ToString())
+}
 
 // Called when the game starts
 void UTankAimingComponent::BeginPlay()
